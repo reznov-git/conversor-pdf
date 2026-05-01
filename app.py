@@ -6,7 +6,6 @@ import os
 import io
 import unicodedata
 
-# Importação dos motores
 from engine.parsers.itau.mensal_consolidado import ItauMensalConsolidadoParser
 
 st.set_page_config(
@@ -14,7 +13,6 @@ st.set_page_config(
     layout="wide"
 )
 
-# --- DICIONÁRIO DE MODELOS ---
 MODELOS_POR_BANCO = {
     "Itaú": ["Mensal Consolidado", "30 Horas", "Não Consolidado", "Visão Mobile"],
     "Banco do Brasil": ["Padrão"],
@@ -38,7 +36,6 @@ def encontrar_imagem(nome_base: str) -> str:
 
 st.title("Conversor de Extratos para Domínio")
 
-# --- BARRA LATERAL ---
 with st.sidebar:
     st.header("1. Seleção do Extrato")
     
@@ -65,12 +62,10 @@ with st.sidebar:
     caminho_imagem = encontrar_imagem(nome_base_imagem)
     
     if caminho_imagem:
-        # Ajustado para width para evitar o aviso do terminal
         st.image(caminho_imagem, width=400) 
     else:
         st.info(f"Imagem não encontrada. Salve um print como 'assets/{nome_base_imagem}.png' ou '.jpg'")
 
-# --- ÁREA DE UPLOAD ---
 arquivos_pdf = st.file_uploader("Arraste os PDFs dos extratos aqui", type=["pdf"], accept_multiple_files=True)
 
 if arquivos_pdf:
@@ -110,24 +105,20 @@ if arquivos_pdf:
         df_bruto = pd.concat(dfs_brutos, ignore_index=True)
         df_bruto = df_bruto.sort_values('Data')
 
-        # --- A CORREÇÃO DE OURO ---
-        # Definimos os termos de saldo exatos que queremos limpar
         saldos_para_ignorar = [
             'SALDO APLIC AUT MAIS',
             'SALDO ANTERIOR',
             'SALDO FINAL',
             'SALDO EM C/C'
         ]
-        # Remove apenas se a string inteira coincidir com a lista
+
         df_bruto = df_bruto[~df_bruto['Descrição'].str.upper().isin(saldos_para_ignorar)].copy()
         
-        # --- CÁLCULO DAS MÉTRICAS ---
         total_linhas = len(df_bruto)
         total_entradas = df_bruto[df_bruto['Valor'] > 0]['Valor'].sum()
         total_saidas = df_bruto[df_bruto['Valor'] < 0]['Valor'].sum()
         variacao_saldo = total_entradas + total_saidas
         
-        # Formatação Domínio
         df_dominio = pd.DataFrame()
         df_dominio['Data'] = df_bruto['Data'].dt.strftime('%d/%m/%Y')
         df_dominio['Cta. Débito'] = np.where(df_bruto['Valor'] > 0, cta_banco, cta_trans_deb)
@@ -142,7 +133,6 @@ if arquivos_pdf:
         
         dados_excel = buffer_excel.getvalue()
 
-    # --- RESULTADOS E AUDITORIA ---
     st.success(f"{len(dfs_brutos)} extrato(s) consolidado(s) com sucesso!")
     
     st.markdown("### Asseguração Rápida")

@@ -18,5 +18,4 @@ class BankParser(ABC):
         
     def _clean_dataframe(self, df: pd.DataFrame) -> pd.DataFrame:
         """Padroniza as colunas de saída para o Streamlit/Excel"""
-        # Garante que o output final tenha sempre a mesma cara, independente do banco
         return df[['Data', 'Descrição', 'Valor']]

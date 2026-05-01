@@ -94,8 +94,7 @@ class ItauMensalConsolidadoParser(BankParser):
 
                     linha_lower = linha_limpa.lower()
 
-                    # --- BOTÃO DE AUTODESTRUIÇÃO SIMPLIFICADO ---
-                    # Acatando a sua análise, agora apenas a demarcação oficial do Itaú encerra a extração.
+                    
                     if linha_lower.startswith("saldo em c/c"):
                         extracao_concluida = True
                         break 
@@ -139,7 +138,6 @@ class ItauMensalConsolidadoParser(BankParser):
                     if not desc_row or len(desc_row) < 3 or not valores_encontrados: continue
                     if not re.search(r'[a-zA-Z]', desc_row): continue
                     
-                    # --- FILTROS GERAIS ---
                     palavras_bloqueadas = (
                         "saldo anterior", "saldo em c/c", "saldo final", "total", "descrição", 
                         "entradas r$", "saídas r$", "outras entradas", "outras saídas", "data",
