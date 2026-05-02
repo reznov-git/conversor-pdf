@@ -20,9 +20,9 @@
 
 ### Adicionado
 
-    - **Novo Motor:** Criado o `ItauNaoConsolidadoParser` para processamento de extratos do modelo "Não Consolidado" do Itaú Empresas.
-    - **Filtragem adaptativa:** Implementada exclusão flexível baseada em tuplas `('saldo', '(-) saldo', etc)` para barrar linhas de saldo sem afetar transações de juros e taxas (e.g. "JUROS SOBRE SALDO NEGATIVO")
+    - Novo Motor: Criado o `ItauNaoConsolidadoParser` para processamento de extratos do modelo "Não Consolidado" do Itaú Empresas.
+    - Filtragem adaptativa: Implementada exclusão flexível baseada em tuplas `('saldo', '(-) saldo', etc)` para barrar linhas de saldo sem afetar transações de juros e taxas (e.g. "JUROS SOBRE SALDO NEGATIVO")
 
 ### Melhorado
 
-    - **Arquitetura do App:** Lógica de roteamento no `app.py` atualizada para suportar encadeamento de submodelos específicos por banco via `elif`.
+    - Arquitetura do App: Lógica de roteamento no `app.py` atualizada para suportar encadeamento de submodelos específicos por banco via `elif`.
