@@ -1,4 +1,4 @@
-# Conversor Contábil - PDF para Excel (XLSX)
+# Conversor Contábil - PDF para Excel (.XLSX)
 
     Esta ferramenta foi desenvolvida para automatizar a extração de dados de extratos bancários em PDF 
     (frequentemente caóticos) e convertê-los em planilhas padronizadas (.xlsx) prontas para escrituração.
