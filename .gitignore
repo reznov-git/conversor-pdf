@@ -1,11 +1,8 @@
-# Ambientes virtuais e caches
 __pycache__/
 *.py[cod]
 .venv/
 venv/
 .env
-
-# Ignorar arquivos de dados dos clientes ABSOLUTAMENTE
 *.pdf
 *.xlsx
 *.xls
