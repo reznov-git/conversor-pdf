@@ -7,6 +7,7 @@ import io
 import unicodedata
 
 from engine.parsers.itau.mensal_consolidado import ItauMensalConsolidadoParser
+from engine.parsers.itau.nao_consolidado import ItauNaoConsolidadoParser
 
 st.set_page_config(
     page_title="Conversor Contábil XLSX",
@@ -34,7 +35,7 @@ def encontrar_imagem(nome_base: str) -> str:
             return caminho
     return None
 
-st.title("Conversor de Extratos para Domínio")
+st.title("Conversor de Extratos para XLSX")
 
 with st.sidebar:
     st.header("1. Seleção do Extrato")
@@ -81,6 +82,8 @@ if arquivos_pdf:
             try:
                 if banco_selecionado == "Itaú" and modelo_selecionado == "Mensal Consolidado":
                     parser = ItauMensalConsolidadoParser()
+                elif banco_selecionado == "Itaú" and modelo_selecionado == "Não Consolidado":
+                    parser = ItauNaoConsolidadoParser()
                 else:
                     st.warning("O motor para este banco/modelo específico ainda está em desenvolvimento.")
                     st.stop()
