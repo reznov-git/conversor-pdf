@@ -18,7 +18,7 @@
 
 ## Layouts Suportados
 
-    Até o momento (versão 1.0) o único modelo estável e resiliente ao teste de estresse é o Itaú Consolidado
+    Até o momento (versão 1.0.0) o único modelo estável e resiliente ao teste de estresse é o Itaú Consolidado
     (verificar /assets/). Os demais extratos e modelos estão em fase de desenvolvimento.
 
 ## Instalação e Configuração
@@ -27,7 +27,7 @@
 
 ### Clone o repositório:
 
-    git clone https://github.com/seu-usuario/conversor-pdf.git
+    git clone https://github.com/reznov-git/conversor-pdf.git
     cd conversor-pdf
 
 ### Crie e ative um ambiente virtual (Recomendado):
