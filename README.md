@@ -6,20 +6,27 @@
 ## Funcionalidades
 
     - Processamento em lote de múltiplos arquivos PDF simultaneamente.
-
     - Leitura estrutural à prova de falhas de alinhamento e caracteres colados.
-
     - Filtro inteligente de saldos marginais e lixo de cabeçalho/rodapé.
-
     - Geração automática das colunas de Cta. Débito, Cta. Crédito, Valor, Data e Histórico
     (Padrão Domínio Sistemas).
-
     - Interface gráfica minimalista via web browser.
 
 ## Layouts Suportados
 
-    Até o momento (versão 1.0.0) o único modelo estável e resiliente ao teste de estresse é o Itaú Consolidado
-    (verificar /assets/). Os demais extratos e modelos estão em fase de desenvolvimento.
+    Até o momento (versão 1.2.0) os modelos estáveis e resilientes ao teste de estresse são: 
+
+    - Itaú (modelos `Mensal Consolidado`, `30 Horas`, `BBA`, `Não Consolidado` e `Visão Mobile`), 
+    - Banco do Brasil (modelos `Empresarial I` e `Empresarial II`),
+    - Bradesco (modelo `Net Empresa`),
+    - BTG Pactual (modelos `GR Capital` e `Empresas`),
+    - C6 Bank (modelo `Padrão`),
+    - Banco Inter (modelo `Padrão`),
+    - Nubank (modelo `Padrão`),
+    - Safra (modelo `Padrão`),
+    - Santander (modelos `Mensal Consolidado`, `IBE Mensal` e `IBE Diário`) 
+
+    **[c.f. /assets/]**
 
 ## Instalação e Configuração
 
