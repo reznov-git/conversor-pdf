@@ -8,6 +8,21 @@ import unicodedata
 
 from engine.parsers.itau.mensal_consolidado import ItauMensalConsolidadoParser
 from engine.parsers.itau.nao_consolidado import ItauNaoConsolidadoParser
+from engine.parsers.itau.bba import ItauBBAParser
+from engine.parsers.itau.trinta_horas import ItauEmpresasParser
+from engine.parsers.itau.visao_mobile import ItauMobileParser
+from engine.parsers.bb.empresarial_i import BancoBrasilEmpresarialIParser
+from engine.parsers.bb.empresarial_ii import BancoBrasilEmpresarialIIParser
+from engine.parsers.bradesco.net_empresa import BradescoNetEmpresaParser
+from engine.parsers.btg.gr_capital import BTGParser
+from engine.parsers.btg.empresas import BtgEmpresasParser
+from engine.parsers.c6.padrao import C6PadraoParser
+from engine.parsers.inter.padrao import InterParser
+from engine.parsers.nubank.padrao import NubankParser
+from engine.parsers.safra.padrao import SafraPadraoParser
+from engine.parsers.santander.mensal_consolidado import SantanderConsolidadoParser
+from engine.parsers.santander.internet_banking_emp_mensal import SantanderIBEParser
+from engine.parsers.santander.internet_banking_emp_diario import SantanderIBEDiarioParser
 
 st.set_page_config(
     page_title="Conversor Contábil XLSX",
@@ -15,12 +30,15 @@ st.set_page_config(
 )
 
 MODELOS_POR_BANCO = {
-    "Itaú": ["Mensal Consolidado", "30 Horas", "Não Consolidado", "Visão Mobile"],
-    "Banco do Brasil": ["Padrão"],
-    "Bradesco": ["Padrão"],
-    "BTG Pactual": ["Padrão"],
-    "PagBank": ["Padrão"],
-    "Safra": ["Padrão"]
+    "Itaú": ["Mensal Consolidado", "30 Horas", "BBA", "Não Consolidado", "Visão Mobile"],
+    "Banco do Brasil": ["Empresarial I", "Empresarial II"],
+    "Bradesco": ["Net Empresa"],
+    "BTG Pactual": ["GR Capital", "Empresas"],
+    "C6 Bank": ["Padrão"],
+    "Inter": ["Padrão"],
+    "Nubank":["Padrão"],
+    "Safra": ["Padrão"],
+    "Santander": ["Mensal Consolidado", "Internet Banking Emp. (mensal)", "Internet Banking Emp. (diário)"]
 }
 
 def normalizar_nome(nome: str) -> str:
@@ -84,6 +102,36 @@ if arquivos_pdf:
                     parser = ItauMensalConsolidadoParser()
                 elif banco_selecionado == "Itaú" and modelo_selecionado == "Não Consolidado":
                     parser = ItauNaoConsolidadoParser()
+                elif banco_selecionado == "Itaú" and modelo_selecionado == "BBA":
+                    parser = ItauBBAParser()
+                elif banco_selecionado == "Banco do Brasil" and modelo_selecionado == "Empresarial I":
+                    parser = BancoBrasilEmpresarialIParser()
+                elif banco_selecionado == "Bradesco" and modelo_selecionado == "Net Empresa":
+                    parser = BradescoNetEmpresaParser()
+                elif banco_selecionado == "Itaú" and modelo_selecionado == "30 Horas":
+                    parser = ItauEmpresasParser()
+                elif banco_selecionado == "Santander" and modelo_selecionado == "Mensal Consolidado":
+                    parser = SantanderConsolidadoParser()
+                elif banco_selecionado == "Itaú" and modelo_selecionado == "Visão Mobile":
+                    parser = ItauMobileParser()
+                elif banco_selecionado == "Safra" and modelo_selecionado == "Padrão":
+                    parser = SafraPadraoParser()
+                elif banco_selecionado == "Santander" and modelo_selecionado == "Internet Banking Emp. (mensal)":
+                    parser = SantanderIBEParser()
+                elif banco_selecionado == "C6 Bank" and modelo_selecionado == "Padrão":
+                    parser = C6PadraoParser()
+                elif banco_selecionado == "Banco do Brasil" and modelo_selecionado == "Empresarial II":
+                    parser = BancoBrasilEmpresarialIIParser()
+                elif banco_selecionado == "Santander" and modelo_selecionado == "Internet Banking Emp. (diário)":
+                    parser = SantanderIBEDiarioParser()
+                elif banco_selecionado == "Nubank" and modelo_selecionado == "Padrão":
+                    parser = NubankParser()
+                elif banco_selecionado == "BTG Pactual" and modelo_selecionado == "GR Capital":
+                    parser = BTGParser()
+                elif banco_selecionado == "BTG Pactual" and modelo_selecionado == "Empresas":
+                    parser = BtgEmpresasParser()
+                elif banco_selecionado == "Inter" and modelo_selecionado == "Padrão":
+                    parser = InterParser()
                 else:
                     st.warning("O motor para este banco/modelo específico ainda está em desenvolvimento.")
                     st.stop()
